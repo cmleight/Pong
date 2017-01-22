@@ -13,8 +13,20 @@ public class GameLogic : MonoBehaviour {
 
     private bool gameOn;
 
-	// Use this for initialization
-	void Start ()
+    private bool _paused;
+
+    public bool paused
+    {
+        get { return _paused; }
+    }
+
+    /// <summary>
+    /// The menu to toggle
+    /// </summary>
+    public GameObject menu;
+
+    // Use this for initialization
+    void Start ()
     {
         scoreCPU = 0;
         scoreHMN = 0;
@@ -25,13 +37,20 @@ public class GameLogic : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        HMN.text = "HMN Score: " + scoreHMN;
-        CPU.text = "CPU Score: " + scoreCPU;
-
-		if ((scoreCPU == 3 || scoreHMN == 3) && gameOn)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Invoke("EndGame", 1.5f);
-            gameOn = false;
+            PauseGame();
+        }
+        if (!_paused)
+        {
+            HMN.text = "HMN Score: " + scoreHMN;
+            CPU.text = "CPU Score: " + scoreCPU;
+
+            if ((scoreCPU == 3 || scoreHMN == 3) && gameOn)
+            {
+                Invoke("EndGame", 1.5f);
+                gameOn = false;
+            }
         }
     }
 
@@ -42,5 +61,25 @@ public class GameLogic : MonoBehaviour {
         GameObject.Find("Paddle - HMN").GetComponent<PaddleController>().enabled = false;
 
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    void PauseGame()
+    {
+        _paused = !menu.activeSelf;
+        if (_paused)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 1;
+        }
+        Debug.Log(_paused);
+        _paused = !menu.activeSelf;
+        menu.SetActive(_paused);
+        Debug.Log(_paused);
+        
     }
 }
