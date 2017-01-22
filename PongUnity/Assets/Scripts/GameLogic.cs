@@ -28,8 +28,15 @@ public class GameLogic : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        scoreCPU = 0;
-        scoreHMN = 0;
+        if (PlayerPrefs.GetInt("load") == 1)
+        {
+            LoadSaveGame.loadSaveGame.Load();
+        }
+        else
+        {
+            scoreCPU = 0;
+            scoreHMN = 0;
+        }
 
         gameOn = true;
 	}
