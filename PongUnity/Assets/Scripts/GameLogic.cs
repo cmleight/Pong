@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour {
 
@@ -11,10 +12,23 @@ public class GameLogic : MonoBehaviour {
     public Text HMN;
     public Text CPU;
 
-    private bool gameOn;
+    public AudioSource EndMusic;
+    public Rigidbody rigBall;
+    public BallBehavior ball;
+    public GameObject ballObj;
 
+    public Camera zoomCam;
+
+    private bool gameOn;
+    //To pause ball
+    private bool _gameState;
     private bool _paused;
 
+    public bool gameState
+    {
+        get { return _gameState; }
+        set { _gameState = value; }
+    }
     public bool paused
     {
         get { return _paused; }
@@ -24,6 +38,9 @@ public class GameLogic : MonoBehaviour {
     /// The menu to toggle
     /// </summary>
     public GameObject menu;
+
+    //To be Continued screen
+    public GameObject tBContinued;
 
     // Use this for initialization
     void Start ()
@@ -39,6 +56,8 @@ public class GameLogic : MonoBehaviour {
         }
 
         gameOn = true;
+        _gameState = true;
+        _paused = false;
 	}
 	
 	// Update is called once per frame
@@ -55,21 +74,41 @@ public class GameLogic : MonoBehaviour {
 
             if ((scoreCPU == 3 || scoreHMN == 3) && gameOn)
             {
-                Invoke("EndGame", 1.5f);
                 gameOn = false;
+                Invoke("EndGame", 0.5f);
+                
             }
         }
     }
 
     void EndGame()
     {
-        GameObject.Find("Ball of Evil").SetActive(false);
-
         GameObject.Find("Paddle - HMN").GetComponent<PaddleController>().enabled = false;
+        EndMusic.Play();
+        rigBall.velocity = Vector3.zero;
+        rigBall.angularVelocity = Vector3.zero;
+        rigBall.isKinematic = true;
+        ball.velocity = 0;
+        ball.initForce = Vector3.zero;
+        Invoke("CamZoom", 9f);
+        Invoke("EndBall", 15f);
+        
 
-        Cursor.lockState = CursorLockMode.None;
     }
 
+    void CamZoom()
+    {
+        zoomCam.transform.position= new Vector3 (ballObj.transform.position.x + 3, ballObj.transform.position.y, ballObj.transform.position.z);
+        tBContinued.SetActive(true);
+    }
+    //Time delay before the Ball deactivates
+    void EndBall()
+    {
+        GameObject.Find("Ball of Evil").SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("MainMenu");
+    }
     void PauseGame()
     {
         _paused = !menu.activeSelf;

@@ -14,7 +14,11 @@ public class BallBehavior : MonoBehaviour {
         get { return velocityBoost; }
         set { velocityBoost = value; }
     }
-
+    public Vector3 initForce
+    {
+        get { return initialForce; }
+        set { initialForce = value; }
+    }
 	// Use this for initialization
 	void Start ()
     {
@@ -35,7 +39,24 @@ public class BallBehavior : MonoBehaviour {
         if (other.tag == "HMN Goal")
             gameLogic.scoreCPU++;
 
-        Invoke("BallReset", 2.0f);
+        if (gameLogic.scoreCPU == 3 || gameLogic.scoreHMN == 3)
+        {
+            gameLogic.gameState = false;
+            rigidBody.velocity = Vector3.zero;
+            velocityBoost = 0;
+            initialForce = Vector3.zero;
+        }
+            
+
+        if (gameLogic.gameState)
+        {
+            Invoke("BallReset", 2.0f);
+            Debug.Log(gameLogic.gameState);
+        }
+        else
+        {
+            Debug.Log(gameLogic.gameState);
+        }
     }
 
     void OnCollisionEnter(Collision other)
