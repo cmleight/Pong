@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 namespace VRCapture.PongCapture
 {
@@ -29,6 +30,7 @@ namespace VRCapture.PongCapture
             else { captureText.text = ""; }
             if (Input.GetKeyDown(KeyCode.F11) && capture_timer==0)
             {
+                Directory.CreateDirectory(VRCaptureConfig.SaveFolder);
                 string filename = VRCaptureConfig.SaveFolder + "screenshot_" + System.DateTime.Now.ToString("MMdd_HH_mm") + ".png";
                 Application.CaptureScreenshot(filename);
                 capture_text_buffer = "Writing screenshot " + filename;
