@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
-namespace VRCapture.PongCapture
+namespace VRCapture
 {
 
     public class CaptureManager : MonoBehaviour
@@ -12,14 +12,16 @@ namespace VRCapture.PongCapture
         public Text captureText;
         public string capture_text_buffer;
         int capture_timer = 0;
-        bool isProcessing = false;
-        bool isDone = false;
+        bool recording = false;
+        int processing_state = 0;
 
         // Use this for initialization
         void Start()
         {
-            VRCapture.Instance.RegisterSessionCompleteDelegate(HandleCaptureFinish);
+            VRCapture.Instance.RegisterSessionCompleteDelegate(HandleRecordFinish);
             Application.runInBackground = true;
+            VRCapture.Instance.GetCaptureVideo(0).isEnabled = true;
+            VRCapture.Instance.GetCaptureAudio().isEnabled = false;
         }
 
         // Update is called once per frame
@@ -38,32 +40,32 @@ namespace VRCapture.PongCapture
             }
             if (Input.GetKeyDown(KeyCode.R) && capture_timer == 0)
             {
-                if (isDone == false)
+                if (recording == false)
                 {
-                    
                     VRCapture.Instance.BeginCaptureSession();
                     Debug.Log("Recording...");
-                    isDone = true;
+                    recording = true;
                 }
                 else {
                     VRCapture.Instance.EndCaptureSession();
                     Debug.Log("End recording, processing...");
-                    isDone = true;
+                    recording = false;
+                    processing_state = 2;
+                    capture_timer = 200;
+                    capture_text_buffer = "Wrote video " + VRCaptureConfig.SaveFolder;// + filename;
                 }
             }
-            if (isProcessing && isDone)
+            if (recording==false && processing_state == 2)
             {
                 Debug.Log("Video processed!");
-                capture_text_buffer = "Wrote video " + VRCaptureConfig.SaveFolder;// + filename;
-                capture_timer = 200;
-                isProcessing = false;
+                processing_state = 0;
             }
-            if (Input.GetKeyDown(KeyCode.V)) {
+            if (Input.GetKeyDown(KeyCode.V) && (Directory.Exists(VRCaptureConfig.SaveFolder))){
                 Debug.Log("Opening "+ VRCaptureConfig.SaveFolder);
                 System.Diagnostics.Process.Start(VRCaptureConfig.SaveFolder);
             }
         }
 
-        void HandleCaptureFinish(){isProcessing = true;}
+        void HandleRecordFinish(){processing_state = 1;}
     }
 }

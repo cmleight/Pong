@@ -18,7 +18,7 @@ namespace VRCapture {
 
         public static string SaveFolder {
             get {
-                return VRCommonConfig.MY_DESKTOP_PATH + "/Screen_Captures/";
+                return VRCommonConfig.MY_DESKTOP_PATH + "\\Screen_Captures\\";
             }
         }
 
@@ -80,7 +80,7 @@ namespace VRCapture {
 
         public static string SaveFolder {
             get {
-                return VRCommonConfig.MY_DESKTOP_PATH + "/Screen_Captures/";
+                return VRCommonConfig.MY_DESKTOP_PATH + "\\Screen_Captures\\";
             }
         }
 
