@@ -10,6 +10,11 @@ public class BallBehavior : MonoBehaviour {
     private Rigidbody rigidBody;
     private float velocityBoost;
 
+    public float velocity {
+        get { return velocityBoost; }
+        set { velocityBoost = value; }
+    }
+
 	// Use this for initialization
 	void Start ()
     {
