@@ -47,6 +47,10 @@ public class LoadSaveGame : MonoBehaviour
         gi.ballLocationy = BallOfEvil.transform.position.y;
         gi.ballLocationz = BallOfEvil.transform.position.z;
         gi.ballSpeed = BallOfEvil.velocity;
+        Vector3 vel = BallOfEvil.GetComponent<Rigidbody>().velocity;
+        gi.ballVelocx = vel.x;
+        gi.ballVelocy = vel.y;
+        gi.ballVelocz = vel.z;
         gi.cpuScore = gameLogic.scoreCPU;
         gi.hmnScore = gameLogic.scoreHMN;
 
@@ -70,6 +74,7 @@ public class LoadSaveGame : MonoBehaviour
 
             aiPaddle.transform.position = new Vector3(gi.aiPaddlex, gi.aiPaddley, gi.aiPaddlez);
             BallOfEvil.transform.position = new Vector3(gi.ballLocationx, gi.ballLocationy, gi.ballLocationz);
+            BallOfEvil.GetComponent<Rigidbody>().velocity = new Vector3(gi.ballVelocx, gi.ballVelocy, gi.ballVelocz);
             BallOfEvil.velocity = gi.ballSpeed;
             gameLogic.scoreHMN = gi.hmnScore;
             gameLogic.scoreCPU = gi.cpuScore;
@@ -87,6 +92,10 @@ class GameInformation {
     public float ballLocationx;
     public float ballLocationy;
     public float ballLocationz;
+
+    public float ballVelocx;
+    public float ballVelocy;
+    public float ballVelocz;
 
     public float ballSpeed;
 
