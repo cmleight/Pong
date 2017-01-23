@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
-using VRCapture;
-namespace VRCapture.Editor {
+
+
+//namespace VRCapture.Editor {
     public class VRCaptureBuildMenuEditor {
         [MenuItem("VRCapture/Build option/Copy ffmpeg to streamingassets in win")]
         private static void BuildInWin() {
@@ -43,4 +44,4 @@ namespace VRCapture.Editor {
             }
         }
     }
-}
+//}
