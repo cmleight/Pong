@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Runtime.InteropServices;
 
-namespace VRCapture {
+//namespace VRCapture {
     /// <summary>
     /// VRCapture video component.
     /// </summary>
@@ -625,9 +625,12 @@ namespace VRCapture {
                 videoCamera.fieldOfView = 90;
                 if(projectionType == PanoramaProjectionType.EQUIRECTANGULAR) {
                     // Change to gamma color space.
+
+                    //PATCHED OUT by Adam Kimble. Required a dependancy on UnityEditor, which does not exist at build time.
+
                     // http://docs.unity3d.com/Manual/LinearLighting.html
-                    originalColorSpace = PlayerSettings.colorSpace;
-                    PlayerSettings.colorSpace = ColorSpace.Gamma;
+                    //originalColorSpace = PlayerSettings.colorSpace;
+                    //PlayerSettings.colorSpace = ColorSpace.Gamma;
                 }
             }
             // Pixels stored in frameRenderTexture(RenderTexture) always read by frameTexture(Texture2D).
@@ -682,7 +685,7 @@ namespace VRCapture {
             }
             if(formatType == FormatType.PANORAMA && projectionType == PanoramaProjectionType.EQUIRECTANGULAR) {
                 // Restore colorSpace states.
-                PlayerSettings.colorSpace = originalColorSpace;
+                //PlayerSettings.colorSpace = originalColorSpace;
             }
             isCapturing = false;
         }
@@ -954,4 +957,4 @@ namespace VRCapture {
         [DllImport("VRCaptureLib")]
         static extern void LibVideoCaptureAPI_Clean(System.IntPtr api);
     }
-}
+//}

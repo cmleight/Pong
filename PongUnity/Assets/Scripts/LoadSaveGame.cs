@@ -9,10 +9,11 @@ public class LoadSaveGame : MonoBehaviour
 {
 
     public static LoadSaveGame loadSaveGame;
-    private string filename = Application.persistentDataPath + "/gameinfo.dat";
+    private string filename;
 
     private void Start()
     {
+        filename = Application.persistentDataPath + "/gameinfo.dat"; 
         PlayerPrefs.SetInt("load", 0);
     }
 

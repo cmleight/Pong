@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace VRCapture {
+//namespace VRCapture {
     /// <summary>
     /// Common config.
     /// </summary>
@@ -25,12 +25,12 @@ namespace VRCapture {
         public static string FFmpegEditorFolder {
             get {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-                return VRCommonConfig.DATA_PATH + "/VRCapture/FFmpeg/Win/";
+                return VRCommonConfig.DATA_PATH + "/Resources/FFmpeg/Win/";
 #elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-                return VRCommonConfig.DATA_PATH + "/VRCapture/FFmpeg/Mac/";
+                return VRCommonConfig.DATA_PATH + "/Resources/FFmpeg/Mac/";
 #endif
-            }
         }
+    }
 
         public static string FFmpegEditorPath {
             get {
@@ -45,12 +45,12 @@ namespace VRCapture {
         public static string FFmpegBuildFolder {
             get {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-                return VRCommonConfig.STREAMING_ASSETS_PATH + "/VRCapture/FFmpeg/Win/";
+                return VRCommonConfig.STREAMING_ASSETS_PATH + "/Resources/FFmpeg/Win/";
 #elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-                return VRCommonConfig.STREAMING_ASSETS_PATH + "/VRCapture/FFmpeg/Mac/";
+                return VRCommonConfig.STREAMING_ASSETS_PATH + "/Resources/FFmpeg/Mac/";
 #endif
-            }
         }
+    }
 
         // TODO, fix path using Unity Build Pipeline
         public static string FFmpegBuildPath {
@@ -92,4 +92,4 @@ namespace VRCapture {
 
         public const int MAX_DEVICE_NUM = 16;
     }
-}
+//}

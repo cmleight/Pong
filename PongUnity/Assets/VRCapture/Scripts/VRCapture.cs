@@ -4,7 +4,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using System;
 
-namespace VRCapture {
+//namespace VRCapture {
     /// <summary>
     /// VRCapture is a plugin helping VR player to record and share
     /// their gameplay easily and nicely.
@@ -485,4 +485,4 @@ namespace VRCapture {
         [DllImport("VRCaptureLib")]
         static extern void LibVideoMergeAPI_Clean(System.IntPtr api);
     }
-}
+//}

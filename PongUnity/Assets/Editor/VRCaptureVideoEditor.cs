@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace VRCapture.Editor {
+//namespace VRCapture.Editor {
     /// <summary>
     /// VR Capture video editor.
     /// </summary>
@@ -44,4 +44,4 @@ namespace VRCapture.Editor {
                 "Enabled", captureVideo.isEnabled);
         }
     }
-}
+//}

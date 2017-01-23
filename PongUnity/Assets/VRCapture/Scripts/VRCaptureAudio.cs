@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace VRCapture {
+//namespace VRCapture {
 
     [RequireComponent(typeof(AudioListener))]
     public class VRCaptureAudio : MonoBehaviour {
@@ -145,4 +145,4 @@ namespace VRCapture {
         [DllImport("VRCaptureLib")]
         static extern void LibAudioCaptureAPI_Clean(System.IntPtr api);
     }
-}
+//}
