@@ -28,6 +28,7 @@ public class MainMenuButton : MonoBehaviour
     void TaskOnClick()
     {
         Debug.Log("To Main");
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
 
     }

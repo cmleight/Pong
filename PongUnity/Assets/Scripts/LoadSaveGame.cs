@@ -9,6 +9,7 @@ public class LoadSaveGame : MonoBehaviour
 {
 
     public static LoadSaveGame loadSaveGame;
+    private string filename = Application.persistentDataPath + "/gameinfo.dat";
 
     private void Start()
     {
@@ -28,6 +29,11 @@ public class LoadSaveGame : MonoBehaviour
         }
     }
 
+    public bool SaveExists()
+    {
+        return File.Exists(filename);
+    }
+
     public void Save()
     {
 
@@ -36,7 +42,7 @@ public class LoadSaveGame : MonoBehaviour
         GameLogic gameLogic = GameObject.Find("Main Camera").GetComponent<GameLogic>();
 
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gameinfo.dat");
+        FileStream file = File.Create(filename);
 
         GameInformation gi = new GameInformation();
 
@@ -67,7 +73,7 @@ public class LoadSaveGame : MonoBehaviour
             GameLogic gameLogic = GameObject.Find("Main Camera").GetComponent<GameLogic>();
 
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gameinfo.dat", FileMode.Open);
+            FileStream file = File.Open(filename, FileMode.Open);
             GameInformation gi = (GameInformation)bf.Deserialize(file);
             file.Close();
 
@@ -79,6 +85,7 @@ public class LoadSaveGame : MonoBehaviour
             gameLogic.scoreHMN = gi.hmnScore;
             gameLogic.scoreCPU = gi.cpuScore;
         }
+        PlayerPrefs.SetInt("load", 0);
     }
 }
 

@@ -45,7 +45,7 @@ public class GameLogic : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        if (PlayerPrefs.GetInt("load") == 1)
+        if (LoadSaveGame.loadSaveGame.SaveExists() && PlayerPrefs.GetInt("load") == 1)
         {
             LoadSaveGame.loadSaveGame.Load();
         }
