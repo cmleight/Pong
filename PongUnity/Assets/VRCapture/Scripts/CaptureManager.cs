@@ -63,6 +63,7 @@ public class CaptureManager : MonoBehaviour
                 processing_state = 2;
                 capture_timer = 200;
                 capture_text_buffer = "Wrote replay to " + VRCaptureConfig.SaveFolder;// + filename;
+                
             }
         }
         if (recording==false && processing_state == 2)

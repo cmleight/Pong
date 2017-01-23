@@ -25,9 +25,9 @@ using UnityEngine;
         public static string FFmpegEditorFolder {
             get {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-                return VRCommonConfig.DATA_PATH + "/Resources/FFmpeg/Win/";
+                return VRCommonConfig.DATA_PATH + "/FFmpeg/Win/";
 #elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-                return VRCommonConfig.DATA_PATH + "/Resources/FFmpeg/Mac/";
+                return VRCommonConfig.DATA_PATH + "/FFmpeg/Mac/";
 #endif
         }
     }
@@ -45,9 +45,9 @@ using UnityEngine;
         public static string FFmpegBuildFolder {
             get {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-                return VRCommonConfig.STREAMING_ASSETS_PATH + "/Resources/FFmpeg/Win/";
+                return VRCommonConfig.STREAMING_ASSETS_PATH + "/FFmpeg/Win/";
 #elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-                return VRCommonConfig.STREAMING_ASSETS_PATH + "/Resources/FFmpeg/Mac/";
+                return VRCommonConfig.STREAMING_ASSETS_PATH + "/FFmpeg/Mac/";
 #endif
         }
     }
