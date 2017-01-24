@@ -108,6 +108,7 @@ public class GameLogic : MonoBehaviour {
         GameObject.Find("Ball of Evil").SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene("MainMenu");
     }
     void PauseGame()

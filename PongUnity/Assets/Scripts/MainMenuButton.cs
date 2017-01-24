@@ -29,6 +29,7 @@ public class MainMenuButton : MonoBehaviour
     {
         //Debug.Log("To Main");
         Time.timeScale = 1;
+        Cursor.visible = true;
         SceneManager.LoadScene("MainMenu");
 
     }
