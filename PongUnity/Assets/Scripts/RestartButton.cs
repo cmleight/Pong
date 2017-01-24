@@ -25,7 +25,7 @@ public class RestartButton : MonoBehaviour {
     /// </summary>
     void TaskOnClick()
     {
-        Debug.Log("Restart");
+        //Debug.Log("Restart");
         SceneManager.LoadScene("3D Pong");
         Time.timeScale = 1;
 

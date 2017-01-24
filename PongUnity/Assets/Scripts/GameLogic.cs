@@ -58,6 +58,7 @@ public class GameLogic : MonoBehaviour {
         gameOn = true;
         _gameState = true;
         _paused = false;
+        Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
@@ -107,6 +108,7 @@ public class GameLogic : MonoBehaviour {
         GameObject.Find("Ball of Evil").SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene("MainMenu");
     }
     void PauseGame()
@@ -114,18 +116,20 @@ public class GameLogic : MonoBehaviour {
         _paused = !menu.activeSelf;
         if (_paused)
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;
         }
         else
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1;
         }
-        Debug.Log(_paused);
+        //Debug.Log(_paused);
         _paused = !menu.activeSelf;
         menu.SetActive(_paused);
-        Debug.Log(_paused);
+        //Debug.Log(_paused);
         
     }
 }
